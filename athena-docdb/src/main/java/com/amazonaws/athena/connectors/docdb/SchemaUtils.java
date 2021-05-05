@@ -75,8 +75,8 @@ public class SchemaUtils
         MongoDatabase db = client.getDatabase(table.getSchemaName());
         int docCount = 0;
         int fieldCount = 0;
-        try (MongoCursor<Document> docs = db.getCollection(table.getTableName()).find().batchSize(numObjToSample)
-                .maxScan(numObjToSample).limit(numObjToSample).iterator()) {
+        try (MongoCursor docs = db.getCollection(table.getTableName()).find().batchSize(numObjToSample)
+            .limit(numObjToSample).iterator()) {
             if (!docs.hasNext()) {
                 return SchemaBuilder.newBuilder().build();
             }
